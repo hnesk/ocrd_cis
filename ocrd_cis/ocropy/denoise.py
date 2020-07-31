@@ -63,6 +63,9 @@ class OcropyDenoise(Processor):
         level = self.parameter['level-of-operation']
 
         for (n, input_file) in enumerate(self.input_files):
+            if input_file.mimetype != MIMETYPE_PAGE:
+                continue
+            
             LOG.info("INPUT FILE %i / %s", n, input_file.pageId or input_file.ID)
             file_id = input_file.ID.replace(self.input_file_grp, self.image_grp)
             if file_id == input_file.ID:
